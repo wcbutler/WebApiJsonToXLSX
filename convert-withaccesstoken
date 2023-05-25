@@ -1,0 +1,20 @@
+import requests
+import pandas
+
+url_gettoken = 'https://{YOURWEB.API}/refresh-token'
+url_usetoken = 'https://{YOURWEB.API}/data'
+payload = {
+    'token': '{YOURREFRESHTOKEN}'
+}
+headers = {
+    'Content-Type': 'application/json'
+}
+
+requests.packages.urllib3.disable_warnings()
+response = requests.post(url_gettoken, json=payload, headers=headers, verify=False)
+access_token = response.json().get('token')
+
+r = requests.get(url_usetoken, headers={'Authorization': 'Bearer ' + access_token})
+
+df_json = pandas.read_json(r.text)
+df_json.to_excel('convert.xlsx')
