@@ -4,4 +4,7 @@ Just a quick and easy way to read JSON from an auth'ed web API and write off to 
 
 Pre-requisits
 py -m pip install requests
+
 py -m pip install pandas
+
+py -m pip install openpyxl
